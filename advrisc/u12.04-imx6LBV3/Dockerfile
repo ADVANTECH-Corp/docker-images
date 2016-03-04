@@ -25,6 +25,11 @@ RUN update-alternatives --set g++ /usr/bin/g++-4.8
 RUN apt-get install -y uboot-mkimage
 RUN apt-get install -y libarchive-zip-perl
 
+# update to subversion-1.7
+RUN apt-add-repository ppa:dominik-stadler/subversion-1.7
+RUN apt-get update
+RUN apt-get install -y subversion
+
 # tools
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
