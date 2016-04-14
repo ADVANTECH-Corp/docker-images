@@ -25,6 +25,9 @@ RUN apt-get install -y bc
 # openjdk
 RUN apt-get install -y openjdk-7-jdk
 
+# crc32
+RUN apt-get install -y libarchive-zip-perl
+
 # tools
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
