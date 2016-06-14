@@ -44,4 +44,4 @@ WORKDIR /home/adv
 USER adv
 
 # android_6.0.1
-ENV USER=adv
+ENV USER adv
