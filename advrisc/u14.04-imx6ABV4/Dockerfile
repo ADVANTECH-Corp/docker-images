@@ -42,3 +42,6 @@ RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/adv
 USER adv
+
+# android_6.0.1
+ENV USER=adv
