@@ -28,12 +28,7 @@ RUN sed -i "s/# \"\\\e\[3~\"/\"\\\e\[3~\"/" /etc/inputrc
 RUN sed -i "s/# \"\\\e\[5~\"\: history/\"\\\e\[A\": history/" /etc/inputrc
 RUN sed -i "s/# \"\\\e\[6~\"\: history/\"\\\e\[B\": history/" /etc/inputrc
 
-#RUN echo $'alias ls=\'/bin/ls --color=auto\'\n\
-#alias ll=\'ls -l\'\n\
-#alias la=\'ls -al\'\n\
-#alias l=ll' >> /etc/profile
-
-RUN echo -e "alias ls='/bin/ls --color=auto'\n\
+RUN /bin/echo -e "alias ls='/bin/ls --color=auto'\n\
 alias ll='ls -l'\n\
 alias la='ls -al'\n\
 alias l=ll" >> /etc/profile
