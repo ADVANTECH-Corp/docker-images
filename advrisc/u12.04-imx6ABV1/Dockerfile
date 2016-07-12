@@ -1,6 +1,6 @@
 FROM ubuntu:12.04
 
-MAINTAINER Adantech
+MAINTAINER Advantech
 
 RUN apt-get update
 
@@ -20,6 +20,10 @@ RUN apt-get install -y libc6-dev
 RUN apt-get install -y build-essential zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev
 RUN apt-get install -y libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 libgl1-mesa-dev g++-multilib mingw32
 RUN apt-get install -y tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386
+
+#Android 4.2
+RUN apt-get install -y liblzo2-dev:i386 uuid-dev:i386
+RUN ln -sf /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
 
 #java
 RUN apt-get update
