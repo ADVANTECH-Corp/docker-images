@@ -40,7 +40,18 @@ RUN apt-get install -y sudo
 # adv account
 RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
 
+# git update
+RUN add-apt-repository ppa:git-core/ppa -y
+RUN apt-get update
+RUN apt-get install git -y
+
 # set up adv as sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/adv
 USER adv
+
+# Setting up the repo utility
+RUN mkdir -p ${HOME}/bin
+RUN curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
+RUN chmod a+x ${HOME}/bin/repo
+ENV PATH="/home/adv/bin:${PATH}"
