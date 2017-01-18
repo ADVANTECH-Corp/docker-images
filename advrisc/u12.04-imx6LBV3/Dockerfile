@@ -30,20 +30,27 @@ RUN apt-add-repository ppa:dominik-stadler/subversion-1.7
 RUN apt-get update
 RUN apt-get install -y subversion
 
+# git update
+RUN add-apt-repository ppa:git-core/ppa
+RUN apt-get update
+RUN apt-get install -y git
+
 # tools
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
+RUN apt-get install -y ftp
 
 # networking
 #RUN apt-get install -y ping net-tools
 
-# adv account
-RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
+# jenkins
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN apt-get install -y openjdk-7-jdk
 
-# git update
-RUN add-apt-repository ppa:git-core/ppa -y
-RUN apt-get update
-RUN apt-get install git -y
+# adv account (password: adv)
+RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
+RUN chmod +s /usr/sbin/sshd
 
 # set up adv as sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
