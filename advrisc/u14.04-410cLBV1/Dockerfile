@@ -9,13 +9,21 @@ RUN apt-get install -y autoconf automake libtool libglib2.0-dev libarchive-dev
 
 # 96Boards specific
 RUN apt-get install -y git whiptail curl
+RUN apt-get install -y android-tools-fsutils
 
 # tools
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
+RUN apt-get install -y ftp
 
-# adv account
-RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
+# jenkins
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN apt-get install -y openjdk-7-jdk
+
+# adv account (password: adv)
+RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
+RUN chmod +s /usr/sbin/sshd
 
 # set up adv as sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
