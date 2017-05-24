@@ -40,3 +40,8 @@ RUN mkdir -p ${HOME}/bin
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
 RUN chmod a+x ${HOME}/bin/repo
 ENV PATH="/home/adv/bin:${PATH}"
+
+# locale
+RUN sudo locale-gen en_US.UTF-8
+RUN sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+ENV LANG="en_US.UTF-8"
