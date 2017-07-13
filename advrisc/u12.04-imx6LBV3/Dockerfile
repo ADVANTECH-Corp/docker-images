@@ -40,6 +40,7 @@ RUN apt-get install -y vim
 RUN apt-get install -y sudo
 RUN apt-get install -y ftp
 RUN apt-get install -y zip
+RUN apt-get install -y parted
 
 # networking
 #RUN apt-get install -y ping net-tools
