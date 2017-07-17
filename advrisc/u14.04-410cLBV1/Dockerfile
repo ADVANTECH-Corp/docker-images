@@ -15,14 +15,15 @@ RUN apt-get install -y android-tools-fsutils
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
 RUN apt-get install -y ftp
+RUN apt-get install -y subversion
 
 # jenkins
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN apt-get install -y openjdk-7-jdk
 
-# mkfs.fat
-RUN apt-get install -y dosfstools
+# mkfs.fat & sgdisk
+RUN apt-get install -y dosfstools gdisk
 
 # chroot
 RUN apt-get install -y qemu qemu-user-static binfmt-support debootstrap
