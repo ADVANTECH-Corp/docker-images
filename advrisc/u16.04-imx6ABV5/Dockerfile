@@ -26,11 +26,13 @@ RUN apt-get install -y gcc-multilib g++-multilib
 RUN apt-get install -y subversion
 RUN apt-get install -y openssh-server openssh-client
 
-# jenkins
-#RUN apt-get install -y openssh-server
-#RUN mkdir /var/run/sshd
-#RUN apt-get update
 RUN apt-get install -y bc
+
+
+# jenkins
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN apt-get update
 
 # openjdk
 RUN apt-get update
@@ -48,9 +50,9 @@ RUN apt-get install -y ftp
 #RUN apt-get install -y ping net-tools
 
 # adv account
-RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
-#RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
-#RUN chmod +s /usr/sbin/sshd
+#RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
+RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
+RUN chmod +s /usr/sbin/sshd
 
 # set up adv as sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -58,19 +60,17 @@ WORKDIR /home/adv
 USER adv
 
 # git config
-#RUN git config --global user.email "you@example.com"
-#RUN git config --global user.name "Your Name"
-#RUN git config --global color.ui "auto"
+RUN git config --global user.email "you@example.com"
+RUN git config --global user.name "Your Name"
+RUN git config --global color.ui "auto"
 
 # repo
-#RUN mkdir -p ${HOME}/bin
-#RUN curl https://storage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
-#RUN chmod a+x ${HOME}/bin/repo
-#ENV PATH="/home/adv/bin:${PATH}"
+RUN mkdir -p ${HOME}/bin
+RUN curl https://storage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
+RUN chmod a+x ${HOME}/bin/repo
+ENV PATH="/home/adv/bin:${PATH}"
 
+#ENV JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredC ompilation -Xmx4g"
 # android
 ENV USER adv
-
-#ENV JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
-
 
