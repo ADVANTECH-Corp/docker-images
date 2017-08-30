@@ -50,6 +50,9 @@ RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN apt-get install -y openjdk-7-jdk
 
+# chroot
+RUN apt-get install -y qemu qemu-user-static binfmt-support debootstrap
+
 # adv account (password: adv)
 RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
 RUN chmod +s /usr/sbin/sshd
