@@ -4,7 +4,8 @@ MAINTAINER Advantech
 
 # yocto
 RUN apt-get update
-RUN apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
+RUN apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect
+RUN apt-get install -y libsdl1.2-dev xterm
 RUN apt-get install -y autoconf automake libtool libglib2.0-dev libarchive-dev
 
 # 96Boards specific
