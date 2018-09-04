@@ -69,7 +69,7 @@ RUN apt-get install -y sudo
 RUN apt-get install -y ftp
 
 #For RK debian linaro rootfs
-RUN apt-get install -y libpsl5
+#RUN apt-get install -y libpsl5
 
 #debian
 RUN wget http://launchpadlibrarian.net/109052632/python-support_1.0.15_all.deb
