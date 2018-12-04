@@ -52,7 +52,6 @@ RUN apt-get install -y libsigsegv2 m4 intltool libdrm-dev sed make binutils buil
 RUN apt-get install -y bzip2 perl tar cpio python unzip rsync file bc wget libncurses5 libqt4-dev libglib2.0-dev libgtk2.0-dev
 RUN apt-get install -y libglade2-dev cvs git mercurial rsync openssh-client subversion asciidoc w3m dblatex
 RUN apt-get install -y graphviz python-matplotlib
-RUN apt-get install -y libc6:i386
 RUN apt-get install -y libssl-dev texinfo liblz4-tool genext2fs time
 
 # jenkins
