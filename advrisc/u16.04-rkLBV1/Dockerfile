@@ -59,6 +59,9 @@ RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN apt-get update
 
+# openjdk
+RUN apt-get update
+RUN apt-get install -y openjdk-8-jdk
 # crc32
 RUN apt-get install -y libarchive-zip-perl
 
@@ -104,7 +107,7 @@ RUN chmod a+x ${HOME}/bin/repo
 ENV PATH="/home/adv/bin:${PATH}"
 
 
-USER adv
+ENV USER adv
 
 # locale
 RUN sudo locale-gen en_US.UTF-8
