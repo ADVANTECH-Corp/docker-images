@@ -44,7 +44,7 @@ RUN apt-get install -y  binfmt-support qemu-user-static live-build
 
 
 #fix error environment for build
-RUN apt-get install gcc-multilib && \
+RUN apt-get install -y gcc-multilib && \
 wget http://launchpadlibrarian.net/109052632/python-support_1.0.15_all.deb && \
 dpkg -i python-support_1.0.15_all.deb
 
