@@ -13,18 +13,6 @@ ENV DEBIAN_FRONTEND noninteractive
 # networking
 RUN apt-get install -y net-tools
 
-# git config
-#/*RUN git config --global user.email "you@example.com"*/
-#/*RUN git config --global user.name "Your Name"*/
-#/*RUN git config --global color.ui "auto"*/
-
-# repo
-RUN mkdir -p ${HOME}/bin
-RUN curl https://storage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
-RUN chmod a+x ${HOME}/bin/repo
-ENV PATH="/home/adv/bin:${PATH}"
-
-
 # locale
 RUN apt-get install -y locales && \
 locale-gen en_US.UTF-8 && \
@@ -44,7 +32,7 @@ RUN apt-get install -y  binfmt-support qemu-user-static live-build
 
 
 #fix error environment for build
-RUN apt-get install -y gcc-multilib && \
+RUN apt-get install gcc-multilib && \
 wget http://launchpadlibrarian.net/109052632/python-support_1.0.15_all.deb && \
 dpkg -i python-support_1.0.15_all.deb
 
@@ -56,3 +44,15 @@ RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/adv
 USER adv
+
+# git config
+RUN git config --global user.email "you@example.com"
+RUN git config --global user.name "Your Name"
+RUN git config --global color.ui "auto"
+
+# repo
+RUN mkdir -p ${HOME}/bin
+RUN curl https://storage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
+RUN chmod a+x ${HOME}/bin/repo
+ENV PATH="/home/adv/bin:${PATH}"
+
