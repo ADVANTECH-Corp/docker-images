@@ -25,7 +25,7 @@ RUN apt-get install -y git gcc-arm-linux-gnueabihf u-boot-tools device-tree-comp
 parted libudev-dev libusb-1.0-0-dev python-linaro-image-tools linaro-image-tools libssl-dev \
 autotools-dev libsigsegv2 m4 libdrm-dev curl sed make binutils build-essential gcc g++ bash \
 patch gzip bzip2 perl tar cpio python unzip rsync file bc wget libncurses5 libglib2.0-dev \
-openssh-client
+openssh-client time
 
 # set rk3288 debian rootfs environment
 RUN apt-get install -y  binfmt-support qemu-user-static live-build
