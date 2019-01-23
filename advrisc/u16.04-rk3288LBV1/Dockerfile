@@ -5,6 +5,22 @@ MAINTAINER jinmin.xu@advantench.com.cn
 # update
 RUN apt-get update
 
+# jenkins
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN apt-get update
+
+# openjdk
+RUN apt-get update
+RUN apt-get install -y openjdk-8-jdk
+# crc32
+RUN apt-get install -y libarchive-zip-perl
+
+# tools
+RUN apt-get install -y vim
+RUN apt-get install -y sudo
+RUN apt-get install -y ftp
+
 # base
 RUN apt-get install -y apt-utils  --assume-yes
 RUN apt-get install -y git-core curl
