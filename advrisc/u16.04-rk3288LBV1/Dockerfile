@@ -14,6 +14,9 @@ RUN add-apt-repository -y ppa:openjdk-r/ppa
 RUN apt-get update
 RUN apt-get install -y openjdk-7-jdk
 
+# chroot
+RUN apt-get install -y qemu qemu-user-static binfmt-support debootstrap
+
 # crc32
 RUN apt-get install -y libarchive-zip-perl
 
@@ -56,6 +59,7 @@ dpkg -i python-support_1.0.15_all.deb
 # adv account
 #RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
 RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
+RUN chmod +s /usr/sbin/sshd
 
 # set up adv as sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
