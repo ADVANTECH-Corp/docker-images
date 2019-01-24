@@ -18,6 +18,7 @@ RUN apt-get install -y openjdk-7-jdk
 RUN apt-get install -y libarchive-zip-perl
 
 # tools
+RUN apt-get install -y locales
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
 RUN apt-get install -y ftp
