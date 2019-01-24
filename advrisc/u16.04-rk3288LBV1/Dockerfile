@@ -14,9 +14,6 @@ RUN add-apt-repository -y ppa:openjdk-r/ppa
 RUN apt-get update
 RUN apt-get install -y openjdk-7-jdk
 
-# chroot
-RUN apt-get install -y qemu qemu-user-static binfmt-support debootstrap
-
 # crc32
 RUN apt-get install -y libarchive-zip-perl
 
@@ -31,13 +28,8 @@ RUN apt-get install -y git-core curl
 ENV DEBIAN_FRONTEND noninteractive
 
 # networking
-RUN apt-get install -y net-tools
 
-# locale
-RUN apt-get install -y locales && \
-locale-gen en_US.UTF-8 && \
-update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-ENV LANG="en_US.UTF-8"
+
 
 
 # set rk3288 sdk environment
@@ -73,7 +65,16 @@ RUN git config --global color.ui "auto"
 
 # repo
 RUN mkdir -p ${HOME}/bin
-RUN curl https://storage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
-RUN chmod a+x ${HOME}/bin/repo
-ENV PATH="/home/adv/bin:${PATH}"
+RUN git clone https://github.com/rockchip-linux/repo.git ~/bin/repo
+ENV PATH="/home/adv/bin/repo:/home/adv/bin:${PATH}"
+# RUN curl https://storage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
+# RUN chmod a+x ${HOME}/bin/repo
+# ENV PATH="/home/adv/bin:${PATH}"
 
+
+ENV USER adv
+
+# locale
+RUN sudo locale-gen en_US.UTF-8
+RUN sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+ENV LANG="en_US.UTF-8"
