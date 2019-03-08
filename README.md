@@ -1,5 +1,5 @@
 # About
-This Docker image can support the following platforms for Rockchip RK3399 projects.
+This Docker image can support the following platforms for imx8 projects.
 
-- Debian9
+- Yocto 2.5 (imx_4.14.78_1.0.0_ga)
 
