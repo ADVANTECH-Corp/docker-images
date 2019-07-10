@@ -74,6 +74,7 @@ RUN apt-get install -y libarchive-zip-perl
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
 RUN apt-get install -y ftp
+RUN apt-get install -y pbzip2
 
 #For RK debian linaro rootfs
 #RUN apt-get install -y libpsl5
