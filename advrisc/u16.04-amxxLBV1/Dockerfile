@@ -4,7 +4,7 @@ MAINTAINER Advantech
 
 # update
 RUN apt-get update
-RUN apt-get install -y apt-utils sudo
+RUN apt-get install -y apt-utils sudo vim ftp
 RUN apt-get install -y locales curl cpio git build-essential python diffstat texinfo gawk chrpath dos2unix wget unzip socat doxygen lib32stdc++6 lib32z1 lib32ncurses5 libc6-dev-i386 gcc-multilib g++-multilib
 
 # jenkins
