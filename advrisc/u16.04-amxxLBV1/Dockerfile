@@ -37,6 +37,15 @@ RUN git config --global user.email "you@example.com"
 RUN git config --global user.name "Your Name"
 RUN git config --global color.ui "auto"
 
+# repo
+RUN mkdir -p ${HOME}/bin \
+	&& git clone https://gerrit-googlesource.lug.ustc.edu.cn/git-repo \
+	&& cp git-repo/repo ${HOME}/bin \
+	&& chmod a+x ${HOME}/bin/repo \
+	&& mkdir -p ${HOME}/bin/.repo \
+	&& mv git-repo ${HOME}/bin/.repo/repo
+ENV PATH="/home/adv/bin:${PATH}"
+
 RUN wget https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/arm-linux-gnueabihf/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz
 RUN tar -Jxvf gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz -C $HOME
 RUN rm gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf.tar.xz
