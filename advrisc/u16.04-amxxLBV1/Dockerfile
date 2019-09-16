@@ -61,7 +61,7 @@ RUN sudo locale-gen en_US.UTF-8
 RUN sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 ENV LANG="en_US.UTF-8"
 
-#RUN sudo mkdir -p /adv \
-#	&& sudo chown adv:adv -R /adv
-#WORKDIR /adv
+RUN sudo mkdir -p /adv \
+	&& sudo chown adv:adv -R /adv
+WORKDIR /adv
 
