@@ -11,7 +11,7 @@ RUN apt-get update
 #RUN apt-get install -y zlib1g-dev liblz-dev
 #RUN apt-get install -y liblzo2-2 liblzo2-dev
 #RUN apt-get install -y lzop
-#RUN apt-get install -y git-core curl
+RUN apt-get install -y git-core curl
 #RUN apt-get install -y u-boot-tools
 #RUN apt-get install -y mtd-utils
 RUN apt-get install -y android-tools-fsutils
