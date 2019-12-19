@@ -1,5 +1,5 @@
 # for SDM660
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 MAINTAINER Advantech
 
@@ -29,7 +29,7 @@ RUN apt-get install -y gcc-multilib g++-multilib
 RUN apt-get install -y subversion
 RUN apt-get install -y openssh-server openssh-client
 
-RUN apt-get install -y bc
+#RUN apt-get install -y bc
 
 
 # jenkins
