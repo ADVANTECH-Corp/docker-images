@@ -7,17 +7,17 @@ MAINTAINER Advantech
 RUN apt-get update
 
 # from SDM660 user guide
-#RUN apt-get install -y uuid uuid-dev
-#RUN apt-get install -y zlib1g-dev liblz-dev
-#RUN apt-get install -y liblzo2-2 liblzo2-dev
-#RUN apt-get install -y lzop
+RUN apt-get install -y uuid uuid-dev
+RUN apt-get install -y zlib1g-dev liblz-dev
+RUN apt-get install -y liblzo2-2 liblzo2-dev
+RUN apt-get install -y lzop
 RUN apt-get install -y git-core curl
-#RUN apt-get install -y u-boot-tools
-#RUN apt-get install -y mtd-utils
+RUN apt-get install -y u-boot-tools
+RUN apt-get install -y mtd-utils
 RUN apt-get install -y android-tools-fsutils
 RUN apt-get install -y gdisk
-#RUN apt-get install -y libz-dev
-#RUN apt-get install -y m4
+RUN apt-get install -y libz-dev
+RUN apt-get install -y m4
 
 RUN apt-get install -y gnupg flex bison gperf build-essential zip gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev
 RUN apt-get install -y libx11-dev lib32z1-dev ccache libgl1-mesa-dev libxml2-utils xsltproc unzip
@@ -28,9 +28,11 @@ RUN apt-get install -y python-markdown
 RUN apt-get install -y gcc-multilib g++-multilib
 RUN apt-get install -y subversion
 RUN apt-get install -y openssh-server openssh-client
-
-#RUN apt-get install -y bc
-
+RUN apt-get install libssl-dev
+RUN apt-get install -y bc
+RUN apt-get install kmod
+RUN apt-get install clang
+RUN apt-get install cmake
 
 # jenkins
 RUN apt-get install -y openssh-server
