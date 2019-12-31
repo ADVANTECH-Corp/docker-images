@@ -28,11 +28,11 @@ RUN apt-get install -y python-markdown
 RUN apt-get install -y gcc-multilib g++-multilib
 RUN apt-get install -y subversion
 RUN apt-get install -y openssh-server openssh-client
-RUN apt-get install libssl-dev
+RUN apt-get install -y libssl-dev
 RUN apt-get install -y bc
-RUN apt-get install kmod
-RUN apt-get install clang
-RUN apt-get install cmake
+RUN apt-get install -y kmod
+RUN apt-get install -y clang
+RUN apt-get install -y cmake
 
 # jenkins
 RUN apt-get install -y openssh-server
