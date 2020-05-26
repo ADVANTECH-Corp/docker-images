@@ -62,13 +62,13 @@ RUN cp -af /opt/Qualcomm/HEXAGON_Tools/8.0.08  /opt/Qualcomm/HEXAGON_Tools/8.0.0
 RUN tar xvf snapdragon_sd_llvm_arm.lnx.3.7_installer_37600.1.tar
 RUN mkdir 3.7.6
 RUN tar -zxvf Snapdragon-llvm-3.7.6-linux64.tar.gz -C ./3.7.6
-RUN mkdir –p /opt/LLVM/
+RUN mkdir -p /opt/LLVM/
 RUN mv ./3.7.6 /opt/LLVM/
 
 RUN tar xvf snapdragon_sd_llvm_arm.lnx.3.8_installer_38400.1.tar
 RUN mkdir 3.8.4
 RUN tar -zxvf Snapdragon_LLVM_ARM_linux_3.8.4.tar.gz -C ./3.8.4
-RUN mkdir –p /opt/LLVM/
+RUN mkdir -p /opt/LLVM/
 RUN mv ./3.8.4 /opt/LLVM/
 
 RUN tar xvf snapdragon_sd_llvm_arm.lnx.3.9_installer_39200.2.tar
@@ -90,7 +90,7 @@ RUN cd perl-5.22.1
 RUN ./Configure -Duseithreads -des 
 RUN make 
 RUN make test 
-RUN make install /usr/local/bin/cpan –u
+RUN make install /usr/local/bin/cpan
 
 RUN cp -af ARM_Compiler_5 /opt/
 
