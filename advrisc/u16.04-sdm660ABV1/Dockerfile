@@ -51,6 +51,20 @@ RUN apt-get install -y vim
 RUN apt-get install -y sudo
 RUN apt-get install -y ftp
 
+
+# networking
+#RUN apt-get install -y ping net-tools
+
+# adv account
+#RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
+RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
+RUN chmod +s /usr/sbin/sshd
+
+# set up adv as sudo
+RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+WORKDIR /home/adv
+USER adv
+
 #set amss env
 RUN cd ~/work/tool
 RUN unzip hexagon.lnx.8.0_installer_08008.102-11-20_02_13_48.zip
@@ -96,18 +110,6 @@ RUN cp -af ARM_Compiler_5 /opt/
 
 RUN cd ..
 
-# networking
-#RUN apt-get install -y ping net-tools
-
-# adv account
-#RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
-RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
-RUN chmod +s /usr/sbin/sshd
-
-# set up adv as sudo
-RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-WORKDIR /home/adv
-USER adv
 
 # git config
 RUN git config --global user.email "you@example.com"
