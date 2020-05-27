@@ -52,7 +52,7 @@ RUN apt-get install -y sudo
 RUN apt-get install -y ftp
 
 #set amss env
-RUN cd tool
+RUN cd ~/work/tool
 RUN unzip hexagon.lnx.8.0_installer_08008.102-11-20_02_13_48.zip
 RUN tar xvf Hexagon_LNX_8_0_Installer_08008_1.tar
 RUN chmod +x Hexagon.LLVM_linux_installer_8.0.08.bin
