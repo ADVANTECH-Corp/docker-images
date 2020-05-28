@@ -65,54 +65,6 @@ RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 WORKDIR /home/adv
 USER adv
 
-#set amss env
-RUN cd /home/adv/work/
-RUN　chmod -R 777 tool
-RUN cd tool
-RUN unzip hexagon.lnx.8.0_installer_08008.102-11-20_02_13_48.zip
-RUN tar xvf Hexagon_LNX_8_0_Installer_08008_1.tar
-RUN chmod +x Hexagon.LLVM_linux_installer_8.0.08.bin
-RUN ./excuteHexg
-RUN cp -af /opt/Qualcomm/HEXAGON_Tools/8.0.08  /opt/Qualcomm/HEXAGON_Tools/8.0.09
-
-RUN tar xvf snapdragon_sd_llvm_arm.lnx.3.7_installer_37600.1.tar
-RUN mkdir 3.7.6
-RUN tar -zxvf Snapdragon-llvm-3.7.6-linux64.tar.gz -C ./3.7.6
-RUN mkdir -p /opt/LLVM/
-RUN mv ./3.7.6 /opt/LLVM/
-
-RUN tar xvf snapdragon_sd_llvm_arm.lnx.3.8_installer_38400.1.tar
-RUN mkdir 3.8.4
-RUN tar -zxvf Snapdragon_LLVM_ARM_linux_3.8.4.tar.gz -C ./3.8.4
-RUN mkdir -p /opt/LLVM/
-RUN mv ./3.8.4 /opt/LLVM/
-
-RUN tar xvf snapdragon_sd_llvm_arm.lnx.3.9_installer_39200.2.tar
-RUN mkdir 3.9.2
-RUN mkdir 3.9.4
-RUN tar -zxvf Snapdragon-llvm-3.9.2-linux64.tar.gz -C ./3.9.2
-RUN tar -zxvf Snapdragon-llvm-3.9.2-linux64.tar.gz -C ./3.9.4
-RUN mkdir -p /opt/LLVM/
-RUN mv ./3.9.2 /opt/LLVM/
-RUN mv ./3.9.4 /opt/LLVM/
-
-RUN tar Jxvf gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux.tar.xz
-RUN mv ./gcc-linaro-arm-linux-gnueabihf-4.9-2014.05_linux /opt
-RUN tar Jxvf gcc-linaro-aarch64-none-elf-4.9-2014.07_linux.tar.xz
-RUN mv ./gcc-linaro-aarch64-none-elf-4.9-2014.07_linux /opt
-
-RUN tar xvfz perl-5.22.1.tar.gz
-RUN cd perl-5.22.1
-RUN ./Configure -Duseithreads -des
-RUN make
-RUN make test
-RUN make install /usr/local/bin/cpan
-
-RUN cp -af ARM_Compiler_5 /opt/
-
-RUN cd ..
-
-
 # git config
 RUN git config --global user.email "you@example.com"
 RUN git config --global user.name "Your Name"
