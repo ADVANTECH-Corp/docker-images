@@ -62,7 +62,7 @@ RUN chmod +s /usr/sbin/sshd
 
 # set up adv as sudo
 RUN echo "adv ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-WORKDIR /home/adv
+WORKDIR /home/adv/work
 USER adv
 
 # git config
