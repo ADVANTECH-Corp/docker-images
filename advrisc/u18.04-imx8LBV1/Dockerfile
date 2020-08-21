@@ -15,8 +15,11 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 RUN apt-get update
 RUN apt-get install -y linux-headers-4.15.0-112-generic
 
-# from freescale user guide
+#Install libcurl4-openssl-dev
+RUN apt-get update
+RUN apt-get install -y libcurl4-openssl-dev
 
+# from freescale user guide
 RUN apt-get install -y uuid uuid-dev
 RUN apt-get install -y zlib1g-dev liblz-dev
 RUN apt-get install -y liblzo2-2 liblzo2-dev
