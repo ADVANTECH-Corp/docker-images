@@ -11,10 +11,6 @@ ENV TZ=Asia/Taipei
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
-#Install linux-headers-4.15.0-112-generic deb package
-RUN apt-get update
-RUN apt-get install -y linux-headers-4.15.0-112-generic
-
 #Install libcurl4-openssl-dev
 RUN apt-get update
 RUN apt-get install -y libcurl4-openssl-dev
