@@ -34,7 +34,6 @@ RUN apt-get install -y mtd-utils
 
 RUN apt-get update
 RUN apt-get install -y locales
-RUN apt-get install -y repo
 RUN apt-get install -y git-core
 RUN apt-get install -y gitk
 RUN apt-get install -y git-gui
