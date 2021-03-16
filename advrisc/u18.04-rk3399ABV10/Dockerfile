@@ -2,22 +2,23 @@ FROM ubuntu:18.04
 
 MAINTAINER Advantech
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 #Install libcurl4-openssl-dev
 RUN apt-get update
 RUN apt-get install -y libcurl4-openssl-dev
 
 # Dependency Library
-RUN apt-get install libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-dev
-RUN apt-get install -y git flex bison gperf build-essential libncurses5-dev:i386
-RUN apt-get install tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386
-RUN apt-get install dpkg-dev libsdl1.2-dev libesd0-dev
-RUN apt-get install git-core gnupg flex bison gperf build-essential
-RUN apt-get install zip curl zlib1g-dev gcc-multilib g++-multilib
-RUN apt-get install libc6-dev-i386
-RUN apt-get install lib32ncurses5-dev x11proto-core-dev libx11-dev
-RUN apt-get install libgl1-mesa-dev libxml2-utils xsltproc unzip m4
-RUN apt-get install lib32z-dev ccache
-RUN apt-get install libssl-dev
+RUN apt-get update && apt-get install -y apt-transport-https
+RUN apt-get install -y git flex bison gperf build-essential
+RUN apt-get install -y tofrodos python-markdown libxml2-utils xsltproc
+RUN apt-get install -y git-core gnupg flex bison gperf build-essential
+RUN apt-get install -y zip curl gcc-multilib g++-multilib
+RUN apt-get install -y libc6-dev-i386
+RUN apt-get install -y lib32ncurses5-dev x11proto-core-dev libx11-dev
+RUN apt-get install -y libgl1-mesa-dev libxml2-utils xsltproc unzip m4
+RUN apt-get install -y lib32z-dev ccache
+RUN apt-get install -y libssl-dev
 
 # Dependency Library
 RUN apt-get install -y uuid uuid-dev
@@ -65,7 +66,6 @@ RUN apt-get install -y diffstat gawk chrpath
 # jenkins
 RUN apt-get install -y openssh-server openssh-client
 RUN mkdir /var/run/sshd
-RUN apt-get update
 
 # openjdk
 RUN apt-get update
