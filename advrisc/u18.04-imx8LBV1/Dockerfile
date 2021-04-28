@@ -50,6 +50,7 @@ RUN apt-get install -y lib32ncurses5-dev
 RUN apt-get install -y x11proto-core-dev
 #--------------------------------
 
+RUN apt-get install -y libyaml-dev
 RUN apt-get install -y libudev-dev
 RUN apt-get install -y libusb-1.0-0-dev
 RUN apt-get install -y python-linaro-image-tools linaro-image-tools gcc-multilib
