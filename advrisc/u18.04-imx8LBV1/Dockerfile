@@ -75,6 +75,9 @@ RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN apt-get update
 
+# upgrade gtk to 3.0
+RUN apt-get install -y libgtk-3-dev
+
 # openjdk
 RUN apt-get update
 RUN apt-get install -y openjdk-8-jdk
