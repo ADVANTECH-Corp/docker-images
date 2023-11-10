@@ -3,12 +3,16 @@ FROM ubuntu:20.04
 MAINTAINER Advantech
 
 ENV DEBIAN_FRONTEND=noninteractive
+RUN echo "deb-src http://archive.ubuntu.com/ubuntu jammy main" | tee -a /etc/apt/sources.list.d/jammy.list
 
 # update
 RUN apt-get update
 
 RUN apt-get install -y git
 RUN apt-get install -y subversion
+
+RUN apt-get build-dep linux -y
+RUN apt-get install git fakeroot libncurses-dev gcc-aarch64-linux-gnu -y
 
 #timezone
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
@@ -70,7 +74,6 @@ RUN mkdir -p ${HOME}/bin
 RUN curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
 RUN chmod a+x ${HOME}/bin/repo
 ENV PATH="/home/adv/bin:${PATH}"
-
 
 ENV USER adv
 
