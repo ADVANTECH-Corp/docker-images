@@ -12,7 +12,7 @@ RUN apt-get install -y git
 RUN apt-get install -y subversion
 
 RUN apt-get build-dep linux -y
-RUN apt-get install git fakeroot libncurses-dev gcc-aarch64-linux-gnu -y
+RUN apt-get install git fakeroot libncurses-dev gcc-aarch64-linux-gnu simg2img -y
 
 #timezone
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
