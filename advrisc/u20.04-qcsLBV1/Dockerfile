@@ -26,7 +26,7 @@ RUN apt-get install -y xz-utils debianutils iputils-ping python3-git python3-jin
 RUN apt-get install -y libegl1-mesa libsdl1.2-dev
 RUN apt-get install -y pylint3 xterm rsync curl zstd lz4 libssl-dev
 
-RUN apt-get install -y curl scons sqlite3 libsqlite3-dev diffstat xmlstarlet texinfo chrpath gcc-aarch64-linux-gnu libarchive-dev ssh libselinux1-dev fakechroot g++-aarch64-linux-gnu libiberty-dev qemu-user-static g++ gawk gcc make libwayland-dev fakeroot libpam0g-dev openjdk-8-jdk-headless binutils-dev util-linux uuid-dev zstd libncurses5 libxml2-utils libxml-simple-perl python3-pip whiptail cpio lib32stdc++6
+RUN apt-get install -y curl scons sqlite3 libsqlite3-dev diffstat xmlstarlet texinfo chrpath gcc-aarch64-linux-gnu libarchive-dev ssh libselinux1-dev fakechroot g++-aarch64-linux-gnu libiberty-dev qemu-user-static g++ gawk gcc make libwayland-dev fakeroot libpam0g-dev openjdk-8-jdk-headless binutils-dev util-linux uuid-dev zstd libncurses5 libxml2-utils libxml-simple-perl python3-pip whiptail cpio lib32stdc++6 lib32z1
 
 RUN pip3 install pyyaml
 
