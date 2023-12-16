@@ -70,7 +70,7 @@ RUN mkdir -p ${HOME}/bin
 RUN curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ${HOME}/bin/repo
 RUN chmod a+x ${HOME}/bin/repo
 ENV PATH="/home/adv/bin:${PATH}"
-
+RUN sudo sed -i 's/#!\/usr\/bin\/env python/#!\/usr\/bin\/env python3/' /home/adv/bin/repo
 
 ENV USER adv
 
