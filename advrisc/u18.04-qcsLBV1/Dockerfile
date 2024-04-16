@@ -55,6 +55,7 @@ RUN export PATH=~/bin:$PATH
 RUN export PATH=${PATH}:~/.local/bin
 RUN echo "export PATH=~/bin:$PATH" >> ~/.bashrc
 
+RUN ln -sf /bin/bash /bin/sh
 # adv account
 #RUN useradd -m -k /home/adv adv -p adv -s /bin/bash -G sudo
 RUN useradd -m -k /home/adv adv -p ajLGz61mdCP76 -s /bin/bash -G sudo
@@ -83,3 +84,4 @@ RUN sudo apt-get install -y locales
 RUN sudo locale-gen en_US.UTF-8
 RUN sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 ENV LANG="en_US.UTF-8"
+
