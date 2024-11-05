@@ -34,6 +34,7 @@ RUN apt-get install -y lib32z-dev libgl1-mesa-dev libxml2-utils libx11-dev lib32
 RUN apt-get install -y libelf-dev
 RUN apt-get install -y dwarves
 RUN apt-get install -y libncurses5
+RUN apt-get install -y clang
 
 # jenkins
 RUN apt-get install -y openssh-server
