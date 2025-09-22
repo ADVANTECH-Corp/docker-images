@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-MAINTAINER Advantech
+LABEL maintainer="Advantech"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -20,11 +20,18 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN apt-get install -y gawk wget git-core diffstat unzip
 RUN apt-get install -y texinfo gcc-multilib
-RUN apt-get install -y build-essential chrpath socat cpio python python3 python3-pip
+RUN apt-get install -y build-essential chrpath socat cpio python3 python3-pip
 RUN apt-get install -y python3-pexpect
 RUN apt-get install -y xz-utils debianutils iputils-ping python3-git python3-jinja2
 RUN apt-get install -y libegl1-mesa libsdl1.2-dev
-RUN apt-get install -y pylint3 xterm rsync curl zstd lz4 libssl-dev
+RUN apt-get install -y pylint xterm rsync curl zstd lz4 libssl-dev
+
+#new add on Yocto 5.1
+RUN apt-get install -y gcc python3-subunit liblz4-tool file libacl1
+
+
+#
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # zstd
 RUN apt-get install -y zstd
@@ -42,6 +49,10 @@ RUN apt-get install -y libarchive-zip-perl
 RUN apt-get install -y vim
 RUN apt-get install -y sudo
 RUN apt-get install -y ftp
+RUN apt-get install -y file
+
+# tools for cert-to-efi-sig-list
+RUN apt-get install -y efitools
 
 # networking
 #RUN apt-get install -y ping net-tools
@@ -68,10 +79,10 @@ RUN chmod a+x ${HOME}/bin/repo
 ENV PATH="/home/adv/bin:${PATH}"
 
 
-ENV USER adv
+ENV USER=adv
 
 # locale
 RUN sudo apt-get install -y locales
 RUN sudo locale-gen en_US.UTF-8
 RUN sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-ENV LANG="en_US.UTF-8"
+ENV LANG=en_US.UTF-8
