@@ -1,7 +1,12 @@
 # About
-This Docker image can support the following platforms for Freescale i.MX8 i.MX6  projects.
+This Docker image can support the following platforms for NXP i.MX95 i.MX93 i.MX8 i.MX6  projects.
 
-- Yocto 4.0 (imx-yocto-L5.15.52_2.1.0)
+- Yocto 5.2 (imx-yocto-L6.12.20)
 
 # Dockerfile links
-- [Yocto4.0](https://github.com/ADVANTECH-Corp/docker-images/blob/u20.04-imx8LBV1/advrisc/u20.04-imx8LBV1/Dockerfile)
+- [Yocto5.2](https://github.com/ADVANTECH-Corp/docker-images/blob/u22.04-imx9LBV1/advrisc/u22.04-imx9LBV1/Dockerfile)
+
+# Add tag 20250922
+- Docker Image download:
+docker pull advrisc/u22.04-imx9lbv1:20250922
+docker pull advrisc/u22.04-imx9lbv1:latest
