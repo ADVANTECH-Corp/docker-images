@@ -8,5 +8,5 @@ This Docker image can support the following platforms for NXP i.MX95 i.MX93 i.MX
 
 # Add tag 20250922
 - Docker Image download:
-docker pull advrisc/u22.04-imx9lbv1:20250922
-docker pull advrisc/u22.04-imx9lbv1:latest
+- #docker pull advrisc/u22.04-imx9lbv1:20250922
+- #docker pull advrisc/u22.04-imx9lbv1:latest
