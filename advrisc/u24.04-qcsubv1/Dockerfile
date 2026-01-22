@@ -26,7 +26,7 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 RUN apt-get install -y zstd
 
 # tools
-RUN apt-get install -y vim repo
+RUN apt-get install -y vim repo gdisk
 
 # Ubuntu kernel
 RUN sed -i '/Types: deb/{N;s/Types: deb\nURIs: http:\/\/archive\.ubuntu\.com\/ubuntu/Types: deb deb-src\nURIs: http:\/\/archive\.ubuntu\.com\/ubuntu/}' /etc/apt/sources.list.d/ubuntu.sources
