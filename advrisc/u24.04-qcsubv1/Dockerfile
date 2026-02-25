@@ -4,51 +4,50 @@ LABEL org.opencontainers.image.authors="Advantech"
 
 RUN userdel -r ubuntu
 
-ARG UNAME=adv
-
-ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
-# update
-RUN apt update && \
-    apt install -y \
+# Ubuntu kernel
+RUN sed -i '/Types: deb/{N;s/Types: deb\nURIs: http:\/\/archive\.ubuntu\.com\/ubuntu/Types: deb deb-src\nURIs: http:\/\/archive\.ubuntu\.com\/ubuntu/}' /etc/apt/sources.list.d/ubuntu.sources
+
+RUN apt-get update; \
+    apt-get build-dep -y linux; \
+    apt-get install -y \
+        fakeroot llvm libncurses-dev dwarves libtraceevent-dev libtracefs-dev dwarfdump \
+        gcc-aarch64-linux-gnu devscripts qemu-user-static mtools dosfstools device-tree-compiler
+
+# base
+RUN apt-get install -y \
         git \
         sudo \
         subversion
 
 # timezone
-RUN DEBIAN_FRONTEND=noninteractive apt install -y tzdata
 ENV TZ=Asia/Taipei
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
+RUN DEBIAN_FRONTEND=noninteractive apt install -y tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+    && dpkg-reconfigure --frontend noninteractive tzdata
 
 # zstd
 RUN apt-get install -y zstd
 
 # tools
-RUN apt-get install -y vim repo gdisk
+RUN apt-get install -y vim repo gdisk gosu
 
-# Ubuntu kernel
-RUN sed -i '/Types: deb/{N;s/Types: deb\nURIs: http:\/\/archive\.ubuntu\.com\/ubuntu/Types: deb deb-src\nURIs: http:\/\/archive\.ubuntu\.com\/ubuntu/}' /etc/apt/sources.list.d/ubuntu.sources
-RUN apt update && \
-    apt build-dep -y linux; \
-    apt install -y \
-        fakeroot llvm libncurses-dev dwarves dwarfdump \
-        gcc-aarch64-linux-gnu \
-        devscripts \
-        qemu-user-static mtools dosfstools
+# extract-dtb
+RUN apt-get install -y python3-pip; \
+    pip install extract-dtb --break-system-packages
 
 # locale
-RUN apt-get install -y locales
-RUN locale-gen en_US.UTF-8
-RUN update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+RUN apt-get install -y locales \
+    && locale-gen en_US.UTF-8 \
+    && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 ENV LANG="en_US.UTF-8"
 
-# Create account
-RUN useradd -m -k /home/${UNAME} ${UNAME} -p ajLGz61mdCP76 -s /bin/bash -G sudo
+# entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# set up as sudo
-RUN echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-WORKDIR /home/${UNAME}
-USER ${UNAME}
-ENV USER=${UNAME}
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]
