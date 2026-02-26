@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y \
     vim whiptail g++ libacl1 \
     lib32stdc++6 libncurses5 checkinstall libreadline-dev libncursesw5-dev \
     libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev curl \
-    sudo ftp libarchive-zip-perl locales whiptail clang-11 libgtest-dev gcc device-tree-compiler
+    sudo ftp libarchive-zip-perl locales whiptail clang-11 libgtest-dev gcc device-tree-compiler \
+    gosu 
 
 RUN mkdir -p /pkg/qct/software/boottools && \
     cp -r /usr/bin/dtc /pkg/qct/software/boottools
@@ -42,51 +43,21 @@ RUN locale-gen en_US.UTF-8 && \
 RUN curl -LO http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb && \
     dpkg -i libffi6_3.2.1-8_amd64.deb
 
-# Install Python 3.10.2
-RUN wget https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz && \
-    tar -xf Python-3.10.2.tgz && \
-    cd Python-3.10.2 && \
-    ./configure --prefix=/opt/python3 --enable-optimizations && \
-    make install && \
-    cd .. && \
-    rm -rf Python-3.10.2 Python-3.10.2.tgz
-RUN ln -s /opt/python3/bin/python3  /opt/python3/bin/python
-ENV PATH="/opt/python3/bin:${PATH}"
-ENV PYTHONPATH="/opt/python3/lib:${PYTHONPATH}"
-
 RUN pip install requests; \
     pip install ruamel.yaml==0.17.17; \
     pip install dtschema==2021.10; \
     pip install jsonschema==4.0.0; \
-    pip install extract-dtb
+    pip install extract-dtb; \
+    pip install PyYAML; \
+    pip install tqdm; \
+    pip install gitpython; \
+    pip install json-schema-for-humans;
 
 RUN apt autoremove -y && apt clean -y && rm -f *.deb
 
-# Create user
-RUN useradd -m -k /home/${UNAME} ${UNAME} -p ajLGz61mdCP76 -s /bin/bash -G sudo && \
-    echo "${UNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-WORKDIR /home/${UNAME}
-USER ${UNAME}
-
-ENV USER=${UNAME}
-ENV HEXAGON_ROOT=~/Qualcomm/HEXAGON_Tools
-
-# Setup git environment
-RUN git config --global user.email "you@example.com" && \
-    git config --global user.name "Your Name" && \
-    git config --global color.ui auto && \
-    git config --global http.postBuffer 1048576000 && \
-    git config --global http.maxRequestBuffer 1048576000 && \
-    git config --global http.lowSpeedLimit 0 && \
-    git config --global http.lowSpeedTime 999999 && \
-    git config --global http.https://chipmaster2.qti.qualcomm.com.followRedirects true && \
-    git config --global http.https://qpm-git.qualcomm.com.followRedirects true
-
-# repo
-RUN mkdir -p ${HOME}/bin && \
-    curl https://raw.githubusercontent.com/GerritCodeReview/git-repo/v2.41/repo -o ${HOME}/bin/repo && \
-    chmod a+x ${HOME}/bin/repo
-
-ENV PATH="~/bin:${PATH}"
-RUN sudo sed -i 's/#!\/usr\/bin\/env python/#!\/usr\/bin\/env python3/' ${HOME}/bin/repo
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]
