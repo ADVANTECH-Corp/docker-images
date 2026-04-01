@@ -27,8 +27,7 @@ RUN apt-get update && apt-get install -y \
     vim whiptail g++ libacl1 \
     lib32stdc++6 libncurses5 checkinstall libreadline-dev libncursesw5-dev \
     libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev curl \
-    sudo ftp libarchive-zip-perl locales whiptail clang-11 libgtest-dev gcc device-tree-compiler \
-    gosu 
+    sudo ftp libarchive-zip-perl locales whiptail clang-11 libgtest-dev gcc device-tree-compiler
 
 RUN mkdir -p /pkg/qct/software/boottools && \
     cp -r /usr/bin/dtc /pkg/qct/software/boottools
@@ -55,9 +54,37 @@ RUN pip install requests; \
 
 RUN apt autoremove -y && apt clean -y && rm -f *.deb
 
-# entrypoint
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# azcopy
+RUN mkdir azcopy_install && \
+    curl -L https://aka.ms/downloadazcopy-v10-linux -o azcopy_install/azcopy.tar.gz && \
+    tar xvf azcopy_install/azcopy.tar.gz --strip-components=1 -C azcopy_install && \
+    mv azcopy_install/azcopy /usr/local/bin/azcopy && \
+    rm -rf azcopy_install && \
+    chmod +x /usr/local/bin/azcopy
 
-ENTRYPOINT ["/entrypoint.sh"]
+# repo
+RUN curl https://raw.githubusercontent.com/GerritCodeReview/git-repo/v2.41/repo -o /usr/local/bin/repo && \
+    chmod +x /usr/local/bin/repo
+
+# Create user
+RUN useradd -m -k /home/${UNAME} ${UNAME} -p ajLGz61mdCP76 -s /bin/bash -G sudo && \
+    echo "${UNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+WORKDIR /home/${UNAME}
+USER ${UNAME}
+
+ENV USER=${UNAME}
+ENV HEXAGON_ROOT=~/Qualcomm/HEXAGON_Tools
+
+# Setup git environment
+RUN git config --global user.email "you@example.com" && \
+    git config --global user.name "Your Name" && \
+    git config --global color.ui auto && \
+    git config --global http.postBuffer 1048576000 && \
+    git config --global http.maxRequestBuffer 1048576000 && \
+    git config --global http.lowSpeedLimit 0 && \
+    git config --global http.lowSpeedTime 999999 && \
+    git config --global http.https://chipmaster2.qti.qualcomm.com.followRedirects true && \
+    git config --global http.https://qpm-git.qualcomm.com.followRedirects true
+
 CMD ["/bin/bash"]
