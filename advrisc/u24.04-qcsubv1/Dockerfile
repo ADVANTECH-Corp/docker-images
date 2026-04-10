@@ -31,11 +31,19 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 RUN apt-get install -y zstd
 
 # tools
-RUN apt-get install -y vim repo gdisk gosu
+RUN apt-get install -y vim repo gdisk gosu fdisk
 
 # extract-dtb
 RUN apt-get install -y python3-pip; \
     pip install extract-dtb --break-system-packages
+
+# azcopy
+RUN mkdir azcopy_install && \
+    curl -L https://aka.ms/downloadazcopy-v10-linux -o azcopy_install/azcopy.tar.gz && \
+    tar xvf azcopy_install/azcopy.tar.gz --strip-components=1 -C azcopy_install && \
+    mv azcopy_install/azcopy /usr/local/bin/azcopy && \
+    rm -rf azcopy_install && \
+    chmod +x /usr/local/bin/azcopy
 
 # locale
 RUN apt-get install -y locales \
