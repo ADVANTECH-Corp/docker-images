@@ -6,7 +6,6 @@ ARG UNAME=adv
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
-ENV PATH="/opt/python3/bin:${PATH}"
 ENV DTC_PATH=/usr/bin
 ENV DTC=/usr/bin
 
@@ -27,7 +26,8 @@ RUN apt-get update && apt-get install -y \
     vim whiptail g++ libacl1 \
     lib32stdc++6 libncurses5 checkinstall libreadline-dev libncursesw5-dev \
     libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev curl \
-    sudo ftp libarchive-zip-perl locales whiptail clang-11 libgtest-dev gcc device-tree-compiler
+    sudo ftp libarchive-zip-perl locales whiptail clang-11 libgtest-dev gcc device-tree-compiler \
+    pipx
 
 RUN mkdir -p /pkg/qct/software/boottools && \
     cp -r /usr/bin/dtc /pkg/qct/software/boottools
@@ -66,6 +66,9 @@ RUN mkdir azcopy_install && \
 RUN curl https://raw.githubusercontent.com/GerritCodeReview/git-repo/v2.41/repo -o /usr/local/bin/repo && \
     chmod +x /usr/local/bin/repo
 
+# Change sh symlink to point to bash for qirp image
+RUN ln -sf /bin/bash /bin/sh
+
 # Create user
 RUN useradd -m -k /home/${UNAME} ${UNAME} -p ajLGz61mdCP76 -s /bin/bash -G sudo && \
     echo "${UNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -86,5 +89,12 @@ RUN git config --global user.email "you@example.com" && \
     git config --global http.lowSpeedTime 999999 && \
     git config --global http.https://chipmaster2.qti.qualcomm.com.followRedirects true && \
     git config --global http.https://qpm-git.qualcomm.com.followRedirects true
+
+RUN sudo cp /etc/skel/.bashrc /home/${UNAME} && sudo chown adv:adv /home/${UNAME}/.bashrc
+
+# kas
+ENV PATH="/home/${UNAME}/.local/bin:${PATH}"
+RUN pipx ensurepath
+RUN pipx install kas
 
 CMD ["/bin/bash"]
