@@ -45,6 +45,9 @@ RUN mkdir azcopy_install && \
     rm -rf azcopy_install && \
     chmod +x /usr/local/bin/azcopy
 
+# audio-topology
+RUN apt-get install -y alsa-utils
+
 # locale
 RUN apt-get install -y locales \
     && locale-gen en_US.UTF-8 \
