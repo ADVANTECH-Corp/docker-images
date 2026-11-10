@@ -1,2 +1,2 @@
 # About
-This Docker image can support the platforms for Qualcomm Ubuntu 24.04 projects.
+This Docker image can support the platforms for Qualcomm Ubuntu 26.04 projects.
