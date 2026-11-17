@@ -26,6 +26,7 @@ RUN TZ=Asia/Taipei && \
     echo $TZ > /etc/timezone
 
 # [QLI2.1] Last line adds the build dependencies pyenv needs to compile Python
+# [Hamoa] acpica-tools provides iasl for the Hamoa Boot ACPI tables
 RUN apt-get update && apt-get install -y \
     repo gawk wget git diffstat unzip texinfo gcc build-essential \
     chrpath socat cpio python3 python3-pip python3-pexpect xz-utils \
@@ -36,7 +37,8 @@ RUN apt-get update && apt-get install -y \
     lib32stdc++6 libncurses5 checkinstall libreadline-dev libncursesw5-dev \
     libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev curl \
     sudo ftp libarchive-zip-perl locales whiptail clang-11 libgtest-dev gcc device-tree-compiler \
-    zlib1g-dev libxml2-dev libxmlsec1-dev liblzma-dev
+    zlib1g-dev libxml2-dev libxmlsec1-dev liblzma-dev \
+    acpica-tools
 
 RUN mkdir -p /pkg/qct/software/boottools && \
     cp -r /usr/bin/dtc /pkg/qct/software/boottools
@@ -53,10 +55,12 @@ RUN curl -LO http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.
 
 # System Python 3.10 packages. One command with retries, so a network failure
 # fails the image build instead of silently skipping a package.
+# [Hamoa] pyelftools for Boot UEFI (uefi_dtb_updateKVM.py), pyminisandbox for TZ (build_all.py)
 RUN for i in 1 2 3 4 5; do \
       pip install --retries 10 --timeout 120 \
         requests ruamel.yaml==0.17.17 dtschema==2021.10 jsonschema==4.0.0 \
-        extract-dtb PyYAML tqdm gitpython json-schema-for-humans && break; \
+        extract-dtb PyYAML tqdm gitpython json-schema-for-humans \
+        pyelftools==0.33 pyminisandbox==1.1.16 && break; \
       [ $i -eq 5 ] && exit 1; echo "pip install failed, retry $i"; sleep 10; \
     done
 
