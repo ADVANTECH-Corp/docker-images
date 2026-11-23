@@ -32,3 +32,18 @@ RUN apt-get update && apt-get install -y \
 
 RUN git config --global user.email  "debian@nxp.com"
 RUN git config --global user.name "NXP debian"
+
+#==================== adv custom begin =====================
+RUN apt-get install -y e2fsprogs locales
+ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+# adv account
+RUN useradd -m -d /home/adv -s /bin/bash -G sudo adv
+RUN echo 'adv ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/adv && \
+    chmod 0440 /etc/sudoers.d/adv
+
+WORKDIR /home/adv
+ENV HOME=/home/adv USER=adv
+USER adv
+#==================== adv custom end =======================
+
