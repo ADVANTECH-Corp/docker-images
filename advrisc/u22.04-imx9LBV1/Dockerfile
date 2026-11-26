@@ -26,8 +26,9 @@ RUN apt-get install -y xz-utils debianutils iputils-ping python3-git python3-jin
 RUN apt-get install -y libegl1-mesa libsdl1.2-dev
 RUN apt-get install -y pylint xterm rsync curl zstd lz4 libssl-dev
 
-#new add on Yocto 5.1
+#new add on Yocto 6.0
 RUN apt-get install -y gcc python3-subunit liblz4-tool file libacl1
+RUN apt-get install -y repo git-lfs
 
 
 #
